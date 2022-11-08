@@ -6,9 +6,11 @@ import { Skeletonpost } from "./Post/Skeletonpost";
 
 export const Zadaniedrugie = () => {
   const [ posts, setPosts ] = useState<any[]>([]);
+  const [ postsFiltered, setPostsFiltered] = useState<any[]>([])
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ postsPerPage ] = useState(12);
   const [ searchValue, setSearchValue ] = useState<string>("")
+
 
   async function fetchPosts() {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -20,9 +22,15 @@ export const Zadaniedrugie = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    setPostsFiltered(posts.filter(item => ((item.title || item.body).includes(searchValue))))
+    setCurrentPage(1)
+    console.log(postsFiltered)
+  },[searchValue])
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = postsFiltered.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -39,7 +47,7 @@ export const Zadaniedrugie = () => {
         </div>
         <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          totalPosts={postsFiltered.length}
           paginate={paginate}
           currentPage={currentPage}
         />
@@ -51,9 +59,12 @@ export const Zadaniedrugie = () => {
         {posts.length !== 0 ? (
           <>
             <div className="cards justify-center flex flex-row flex-wrap gap-5">
-              {currentPosts.map((post: SharedTypes.Posts) => (
-                <Post searchValue={searchValue} post={post} key={post.id} />
-              ))}
+              {currentPosts.length > 0 ? (
+                currentPosts.map((post: SharedTypes.Posts) => (
+                  <Post searchValue={searchValue} post={post} key={post.id} />
+                ))
+              
+              ) : (<div className="pointer-events-none"><p>No posts meet selected criteria</p></div>)}
             </div>
           </>
         ) : (

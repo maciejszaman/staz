@@ -4,4 +4,6 @@
 
 body {
   font-family: "Epilogue", sans-serif;
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
 }

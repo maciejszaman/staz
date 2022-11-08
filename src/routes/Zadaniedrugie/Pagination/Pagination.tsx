@@ -7,7 +7,9 @@ const Pagination = ({
   paginate,
   currentPage,
 }: SharedTypes.PaginationProps) => {
-  const LastPage = Math.ceil(totalPosts / postsPerPage)
+  const lastPage = Math.ceil(totalPosts / postsPerPage)
+
+  console.log(totalPosts)
 
 /*   const pageNumbers = [];
 
@@ -27,8 +29,8 @@ const Pagination = ({
   return (
       <div className="flex flex-row justify-around pb-2 bg-slate-200 drop-shadow-md">
         <button className={currentPage !== 1 ? `w-[20%] hover:bg-slate-300 rounded-lg` : `w-[20%] text-slate-400 pointer-events-none`} onClick={() => paginate(currentPage - 1)}>Previous</button>
-        <p className="font-bold">{currentPage}</p>
-        <button className={currentPage !== LastPage ? "w-[20%] hover:bg-slate-300 rounded-lg": "w-[20%] text-slate-400 pointer-events-none"} onClick={() => paginate(currentPage + 1)}>Next</button>
+        {totalPosts ? <p className="font-bold">{`${currentPage}/${lastPage}`}</p> : <p className="font-bold">{`0/0`}</p> }
+        <button className={currentPage !== lastPage && totalPosts !== 0 ? "w-[20%] hover:bg-slate-300 rounded-lg": "w-[20%] text-slate-400 pointer-events-none"} onClick={() => paginate(currentPage + 1)}>Next</button>
       </div>
   );
 };
