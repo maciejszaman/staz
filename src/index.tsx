@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Piesek } from './routes/Piesek';
 import { Kotek } from './routes/Kotek';
 import { Zadaniedrugie } from './routes/Zadaniedrugie/Zadaniedrugie';
+import { Form } from './routes/Form/Form'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,6 +20,7 @@ root.render(
         <Route path='/kotek' element={<Piesek/>} />
         <Route path='/piesek' element={<Kotek/>} />
         <Route path='/2' element={<Zadaniedrugie/>} />
+        <Route path='/3' element={<Form/>}/>
       </Routes>
       </BrowserRouter>
   </React.StrictMode>
