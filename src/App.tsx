@@ -18,6 +18,11 @@ function App() {
             <p className='mt-6'>Formularz</p>
           </div>
         </a>
+        <a href='/4'>
+          <div className='card w-60 h-24 rounded-lg p-3 hover:bg-amber-100 hover:shadow-lg text-center bg-amber-100 shadow'>
+            <p className='mt-6'>Accordion</p>
+          </div>
+        </a>
         
       </div>
     </div>

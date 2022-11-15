@@ -9,7 +9,6 @@ export const Pages = ({currentPage}:Types.PagesProps) => {
     const [emailValue, setEmailValue] = useState("")
     const [phoneNumberValue, setPhoneNumberValue] = useState("")
     const [peselValue, setPeselValue] = useState("")
-    const [formLegit, setFormLegit] = useState(false)
     const [tosAccepted, setTosAccepted] = useState()
 
     function containsNumbers(str:string) {
@@ -22,13 +21,6 @@ export const Pages = ({currentPage}:Types.PagesProps) => {
 
     function containsOnlyNumbers(str:string) {
         return /^\d+$/.test(str)
-    }
-
-    function checkIfLegit() {
-        if (nameValue !== "" && !containsNumbers(nameValue) && containsOnlyLetters(nameValue) && secondNameValue !== "" && !containsNumbers(secondNameValue) && containsOnlyLetters(secondNameValue) && usernameValue !== "" && emailValue !== "" && emailValue.includes("@") && !emailValue.includes(" ") && phoneNumberValue !== "" && containsOnlyNumbers(phoneNumberValue) && peselValue !== "" && containsOnlyNumbers(peselValue)){
-        setFormLegit(true)
-    }
-    else setFormLegit(false)
     }
 
         if (currentPage === 0){
@@ -56,7 +48,7 @@ export const Pages = ({currentPage}:Types.PagesProps) => {
                             Lorem ipsum
                         </div>
                         <div className="inputs" id="secondPageForm">
-                            <form className='flex flex-col gap-3' onSubmit={() => checkIfLegit()}>
+                            <form className='flex flex-col gap-3'>
                                 <input className={phoneNumberValue !== "" && containsOnlyNumbers(phoneNumberValue) ? 'p-1 rounded-lg' : 'p-1 rounded-lg border-red-500 bg-red-200 text-red-500 '} onChange={(e) => {setPhoneNumberValue(e.target.value)}} placeholder='Phone Number' value={phoneNumberValue}></input>
                                 <input className={peselValue !== "" && containsOnlyNumbers(peselValue) ?'p-1 rounded-lg' : 'p-1 rounded-lg border-red-500 bg-red-200 text-red-500'} onChange={(e) => {setPeselValue(e.target.value)}} placeholder='PESEL' value={peselValue}></input>
                                 <div className="tos flex flex-row justify-center gap-6">
@@ -75,14 +67,18 @@ export const Pages = ({currentPage}:Types.PagesProps) => {
                         <div className="formheader text-sky-900 font-medium text-lg">
                             Lorem ipsum
                         </div>
-                        <div className="inputs flex flex-col gap-3">
+                        {
+                            (nameValue !== "" && !containsNumbers(nameValue) && containsOnlyLetters(nameValue) && secondNameValue !== "" && !containsNumbers(secondNameValue) && containsOnlyLetters(secondNameValue) && usernameValue !== "" && emailValue !== "" && emailValue.includes("@") && !emailValue.includes(" ") && phoneNumberValue !== "" && containsOnlyNumbers(phoneNumberValue) && peselValue !== "" && containsOnlyNumbers(peselValue)) ?
+                            
+                            <div className="text-sky-800 flex flex-col gap-3">
                             <p>{nameValue}</p>
                             <p>{secondNameValue}</p>
                             <p>{emailValue}</p>
                             <p>{usernameValue}</p>
                             <p>{phoneNumberValue}</p>
                             <p>{peselValue}</p>
-                        </div>
+                        </div> :
+                        <p>Information provided is not valid</p>}
                     </div>   
                     )
                 }

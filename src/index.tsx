@@ -8,6 +8,7 @@ import { Piesek } from './routes/Piesek';
 import { Kotek } from './routes/Kotek';
 import { Zadaniedrugie } from './routes/Zadaniedrugie/Zadaniedrugie';
 import { Form } from './routes/Form/Form'
+import { Accordion } from './routes/Accordion/Accordion';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,6 +22,7 @@ root.render(
         <Route path='/piesek' element={<Kotek/>} />
         <Route path='/2' element={<Zadaniedrugie/>} />
         <Route path='/3' element={<Form/>}/>
+        <Route path='/4' element={<Accordion/>} />
       </Routes>
       </BrowserRouter>
   </React.StrictMode>
