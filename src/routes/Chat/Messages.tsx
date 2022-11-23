@@ -6,7 +6,7 @@ export const Messages = ({messages}:Types.MessagesProps) => {
   return (
     <>
     {
-    messages.map((message, index) => {
+    messages.slice(0).reverse().map((message, index) => {
       return(
         <div key={index} className="flex flex-col p-2 w-fit rounded-lg bg-slate-500">
           <p className='text-xs text-slate-300'>message author</p>
